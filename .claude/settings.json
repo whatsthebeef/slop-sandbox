@@ -1,0 +1,36 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh pr ready:*)",
+      "Bash(gh pr view:*)",
+      "Bash(git push origin s*)",
+      "mcp__claude_ai_Slop__*",
+      "mcp__slop__*"
+    ],
+    "deny": [
+      "Bash(gh pr create:*)",
+      "Bash(gh pr merge:*)",
+      "Bash(git push --force*)"
+    ]
+  },
+  "sandbox": {
+    "enabled": true,
+    "autoAllowBashIfSandboxed": true
+  },
+  "enabledMcpjsonServers": [
+    "slop"
+  ],
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/slop_after_push.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
